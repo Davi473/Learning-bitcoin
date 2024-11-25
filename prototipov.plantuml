@@ -1,0 +1,42 @@
+@startuml prototipov1
+
+class Blockchain{
+  - chain: [{Block}]
+}
+
+class Miner{
+  +proofOfWork()
+}
+
+class Wallet{
+  +sendCoin()
+}
+
+class Block{
+  - index: Int
+  - timeStamp: Int
+  - nonce: Int
+  - hash: String
+  - previousBlockHash:
+  - Transactions: [{Transaction}]
+  + createBlock()
+}
+
+class Transaction{
+  - transactionID: String
+  - coinAmount: Int
+  - senderPublickey: String
+  - receiverPublicKey: String
+  - isConfirmed: boolean
+}
+
+class Coin{
+
+}
+
+class Mempool{
+  - pendingTransactions: [{Transaction}]
+  + addTransaction (transaction) 
+}
+
+@enduml
