@@ -3,11 +3,22 @@ import Block from "./block.mjs";
 import Transaction from "./transaction.mjs";
 import Mempool from "./mempool.mjs";
 import Miner from "./miner.mjs";
+import Wallet from "./wallet.mjs";
 
 const blockchain = new Blockchain();
+const mempool = new Mempool();
 
-const genesisWallet = blockchain.genesisWallet;
+const minerWallet = new Wallet("MinerWallet", blockchain, mempool);
+const testWallet = new Wallet("TestWallet", blockchain, mempool);
 
-genesisWallet.updateBalance();
+const miner = new Miner(blockchain, mempool, minerWallet);
 
-console.log(genesisWallet.getWallet());
+miner.mineBlock();
+miner.mineBlock();
+
+minerWallet.sendCoin(1, testWallet.publicKey);
+
+miner.mineBlock();
+
+console.log(minerWallet.getWallet());
+console.log(testWallet.getWallet());
